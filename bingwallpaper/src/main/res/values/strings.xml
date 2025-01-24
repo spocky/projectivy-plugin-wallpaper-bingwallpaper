@@ -1,0 +1,13 @@
+<resources>
+    <string name="plugin_name">Projectivy Wallpaper : Bing Wallpaper</string>
+    <string name="plugin_short_name">Bing Wallpaper</string>
+    <string name="plugin_description">Bing\'s Photo of the day</string>
+
+    <!--Plugin UUID *** YOU NEED TO CHANGE IT *** -->
+    <!--https://www.uuidgenerator.net/version4 -->
+    <string name="plugin_uuid">638363af-93ab-4d9f-bbc1-7a177535dfdd</string>
+
+    <!-- Setting parameters -->
+    <string name="settings">Wallpaper settings</string>
+    <string name="setting_video_source">Wallpaper source</string>
+</resources>

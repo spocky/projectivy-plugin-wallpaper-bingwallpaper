@@ -1,4 +1,4 @@
-package tv.projectivy.plugin.wallpaperprovider.sample
+package tv.projectivy.plugin.wallpaperprovider.bingwallpaper
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -9,9 +9,8 @@ import com.google.gson.ToNumberPolicy
 import com.google.gson.reflect.TypeToken
 
 object PreferencesManager {
-    private const val IMAGE_URL_KEY = "image_url_key"
-
     lateinit var preferences: SharedPreferences
+    const val DEFAULT_WALLPAPER_SOURCE_URL = "https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=8"
 
     fun init(context: Context) {
         preferences = PreferenceManager.getDefaultSharedPreferences(context)
@@ -46,9 +45,9 @@ object PreferencesManager {
             else -> throw UnsupportedOperationException("Not yet implemented")
         }
 
-    var imageUrl: String
-        get() = PreferencesManager[IMAGE_URL_KEY, "https://images.pexels.com/photos/462162/pexels-photo-462162.jpeg"]
-        set(value) { PreferencesManager[IMAGE_URL_KEY]=value }
+    var wallpaperSourceUrl: String
+        get() = PreferencesManager["wallpaper-source-url", DEFAULT_WALLPAPER_SOURCE_URL].takeIf { it.isNotEmpty() } ?: DEFAULT_WALLPAPER_SOURCE_URL
+        set(value) { PreferencesManager["wallpaper-source-url"]=value }
 
     fun export(): String {
         return Gson().toJson(preferences.all)

@@ -22,14 +22,14 @@
         <activity
             android:name=".SettingsActivity"
             android:exported="true">
-            <intent-filter>
+            <!-- only for debugging purposes, a plugin doesn't have to appear in the launcher -->
+            <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
-            </intent-filter>
-
+            </intent-filter>-->
         </activity>
 
         <service
@@ -59,7 +59,7 @@
             <!-- Plugin name -->
             <meta-data
                 android:name="name"
-                android:value="@string/plugin_name"/>
+                android:value="@string/plugin_short_name"/>
 
             <!-- Plugin activity called by Projectivy to configure it -->
             <meta-data
@@ -71,10 +71,10 @@
                 android:name="itemsCacheDurationMillis"
                 android:value="@integer/items_cache_duration_millis"/>
 
-            <!-- This sample plugin will receive time_elapsed and launcher_idle_mode_changed events -->
+            <!-- This sample plugin will receive time_elapsed events -->
             <meta-data
                 android:name="updateMode"
-                android:value="17"/>
+                android:value="1"/>
         </service>
 
     </application>
