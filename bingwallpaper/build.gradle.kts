@@ -14,8 +14,8 @@ android {
         applicationId = "tv.projectivy.plugin.wallpaperprovider.bingwallpaper"
         minSdk = 24
         targetSdk = 35
-        versionCode = 1
-        versionName = "1.00"
+        versionCode = 2
+        versionName = "1.01"
 
         base {
             archivesName = "ProjectivyPlugin-BingWallpaper-$versionName-c$versionCode"

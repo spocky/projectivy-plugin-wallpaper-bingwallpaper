@@ -20,5 +20,5 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 -keepclassmembers class tv.projectivy.plugin.wallpaperprovider.api.Wallpaper { !static !transient <fields>; }
--keep class tv.projectivy.plugin.wallpaperprovider.bingwallpaper.Video
--keepclassmembers class tv.projectivy.plugin.wallpaperprovider.bingwallpaper.Video { !static !transient <fields>; }
+-keep class tv.projectivy.plugin.wallpaperprovider.bingwallpaper.BingWallpaper
+-keepclassmembers class tv.projectivy.plugin.wallpaperprovider.bingwallpaper.BingWallpaper { !static !transient <fields>; }
