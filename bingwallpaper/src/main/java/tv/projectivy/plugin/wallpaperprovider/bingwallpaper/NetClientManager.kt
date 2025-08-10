@@ -1,5 +1,6 @@
 package tv.projectivy.plugin.wallpaperprovider.bingwallpaper
 
+
 import android.content.Context
 import android.net.TrafficStats
 import android.util.Log
@@ -18,11 +19,12 @@ object NetClientManager {
     private const val CACHE_SIZE = 10 * 1024 * 1024L
     private const val MAX_AGE_IN_DAYS = 3
 
-    private val cacheControl: CacheControl by lazy {
-        CacheControl.Builder()
+    private val NO_OVERRIDE_CACHE_CONTROL_HEADERS = listOf("no-store", "no-cache", "must-revalidate", "max-age=")
+
+    private val cacheControl: CacheControl
+        get() = CacheControl.Builder()
             .maxAge(MAX_AGE_IN_DAYS, TimeUnit.DAYS)
             .build()
-    }
 
     lateinit var httpClient: OkHttpClient
 
@@ -63,8 +65,18 @@ object NetClientManager {
             val request: Request = chain.request()
             val response: Response = chain.proceed(request)
 
+            // Don't add custom Cache-Control header when not needed
+            val existingCacheControl = response.header("Cache-Control")
+            existingCacheControl
+                ?.takeIf { header ->
+                    NO_OVERRIDE_CACHE_CONTROL_HEADERS
+                        .any { header.contains(it) }
+                }
+                ?.let { return response }
+
             return response.newBuilder()
-                .header("Cache-Control", cacheControl.toString())
+                .removeHeader("Cache-Control")
+                .addHeader("Cache-Control", cacheControl.toString())
                 .build()
         }
     }
