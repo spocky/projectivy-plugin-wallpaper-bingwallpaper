@@ -12,6 +12,10 @@
         android:name="android.software.leanback"
         android:required="true" />
 
+    <queries>
+        <package android:name="com.spocky.projengmenu" />
+    </queries>
+
     <application
         android:allowBackup="true"
         android:label="@string/plugin_name"
@@ -22,14 +26,13 @@
         <activity
             android:name=".SettingsActivity"
             android:exported="true">
-            <!-- only for debugging purposes, a plugin doesn't have to appear in the launcher -->
-            <!--<intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
-            </intent-filter>-->
+            </intent-filter>
         </activity>
 
         <service
