@@ -10,7 +10,7 @@ class SettingsFragment : GuidedStepSupportFragment() {
     override fun onCreateGuidance(savedInstanceState: Bundle?): Guidance {
         return Guidance(
             getString(R.string.plugin_short_name),
-            getString(R.string.plugin_description),
+            "v${BuildConfig.VERSION_NAME}\n\n${getString(R.string.plugin_description)}",
             getString(R.string.settings),
             AppCompatResources.getDrawable(requireActivity(), R.mipmap.ic_banner)
         )

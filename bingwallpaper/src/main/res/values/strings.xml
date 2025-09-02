@@ -3,6 +3,8 @@
     <string name="plugin_short_name">Bing Wallpaper</string>
     <string name="plugin_description">Bing\'s Photo of the day</string>
 
+    <string name="projectivy_not_installed">Warning, this plugin requires Projectivy Launcher which does not seem to be installed.</string>
+
     <!--Plugin UUID *** YOU NEED TO CHANGE IT *** -->
     <!--https://www.uuidgenerator.net/version4 -->
     <string name="plugin_uuid">638363af-93ab-4d9f-bbc1-7a177535dfdd</string>
