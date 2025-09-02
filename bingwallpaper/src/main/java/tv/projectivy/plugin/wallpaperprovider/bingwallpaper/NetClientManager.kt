@@ -11,7 +11,8 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
 import java.io.IOException
-import java.util.concurrent.TimeUnit
+import kotlin.time.Duration.Companion.days
+import kotlin.time.Duration.Companion.seconds
 
 object NetClientManager {
 
@@ -23,7 +24,7 @@ object NetClientManager {
 
     private val cacheControl: CacheControl
         get() = CacheControl.Builder()
-            .maxAge(MAX_AGE_IN_DAYS, TimeUnit.DAYS)
+            .maxAge(MAX_AGE_IN_DAYS.days)
             .build()
 
     lateinit var httpClient: OkHttpClient
@@ -32,7 +33,7 @@ object NetClientManager {
         TrafficStats.setThreadStatsTag(1906)
         httpClient = OkHttpClient.Builder()
             .cache(Cache(context.cacheDir, CACHE_SIZE))
-            .callTimeout(CALL_TIMEOUT_IN_S, TimeUnit.SECONDS)
+            .callTimeout(CALL_TIMEOUT_IN_S.seconds)
             .addNetworkInterceptor(CacheInterceptor())
             .build()
     }
@@ -49,7 +50,7 @@ object NetClientManager {
         try {
             httpClient.newCall(request).execute().use { response ->
                 if (response.isSuccessful) {
-                    return response.body?.string()
+                    return response.body.string()
                 }
                 Log.d("NetClientManager", "Request unsuccessful. Response code:" + response.code)
             }
