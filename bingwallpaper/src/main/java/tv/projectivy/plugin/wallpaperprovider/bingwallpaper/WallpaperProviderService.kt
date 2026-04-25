@@ -4,22 +4,25 @@ import android.app.Service
 import android.content.Intent
 import android.os.IBinder
 import android.util.Log
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
+import kotlinx.serialization.json.Json
 import tv.projectivy.plugin.wallpaperprovider.api.Event
 import tv.projectivy.plugin.wallpaperprovider.api.IWallpaperProviderService
 import tv.projectivy.plugin.wallpaperprovider.api.Wallpaper
 import tv.projectivy.plugin.wallpaperprovider.api.WallpaperDisplayMode
 import tv.projectivy.plugin.wallpaperprovider.api.WallpaperType
-import java.lang.reflect.Type
 
 class WallpaperProviderService: Service() {
 
-    val gson by lazy { Gson() }
-    val wallpaperListType: Type = object : TypeToken<List<BingWallpaper>>() {}.type
+    private val json by lazy {
+        Json {
+            ignoreUnknownKeys = true
+            isLenient = true
+            allowTrailingComma = true
+        }
+    }
 
     override fun onCreate() {
         super.onCreate()
@@ -65,22 +68,19 @@ class WallpaperProviderService: Service() {
     suspend fun parseJson(jsonString: String?): List<Wallpaper> {
         return withContext(Dispatchers.Default) {
             try {
-                // Parse the JSON into a list of Wallpaper objects
-                //gson.fromJson<List<BingWallpaper>?>(jsonString, wallpaperListType)
-                // Convert the list of BingWallpaper objects into a list of Wallpaper objects
+                if (jsonString.isNullOrBlank()) {
+                    return@withContext emptyList()
+                }
 
-                // Parse the JSON into a map containing the list of BingWallpaper objects
-                val jsonObject = gson.fromJson<Map<String, Any>>(jsonString, object : TypeToken<Map<String, Any>>() {}.type)
-                val imagesJson = gson.toJson(jsonObject["images"])
-                val bingWallpapers = gson.fromJson<List<BingWallpaper>>(imagesJson, object : TypeToken<List<BingWallpaper>>() {}.type)
+                // Parse the JSON and extract the "images" array
+                val response = json.decodeFromString<BingResponse>(jsonString)
 
                 // Convert the list of BingWallpaper objects into a list of Wallpaper objects
-                bingWallpapers
-                ?.map { Wallpaper("https://www.bing.com"+it.url, WallpaperType.IMAGE,
+                response.images
+                .map { Wallpaper("https://www.bing.com"+it.url, WallpaperType.IMAGE,
                     WallpaperDisplayMode.DEFAULT, it.title, it.copyrightlink, it.copyright) }
                 // Filter out any wallpapers with an empty URI
-                ?.filter { it.uri.isNotBlank() }
-                ?: emptyList()
+                .filter { it.uri.isNotBlank() }
             } catch (e: Exception) {
                 Log.e("JSON Parsing", "Error parsing JSON: $e")
                 emptyList()
