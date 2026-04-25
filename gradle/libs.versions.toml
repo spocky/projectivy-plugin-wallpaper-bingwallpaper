@@ -1,6 +1,6 @@
 [versions]
 # SDK
-appId = "tv.projectivy.plugin.wallpaperprovider.bingwallpaper"
+appId = "tv.projectivy.plugin.wallpaperprovider.photooftheday"
 compileSdk = "37"
 minSdk = "23"
 targetSdk = "37"

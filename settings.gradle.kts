@@ -14,5 +14,5 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "Projectivy Wallpaper Provider"
-include(":bingwallpaper")
+include(":photooftheday")
 include(":api")

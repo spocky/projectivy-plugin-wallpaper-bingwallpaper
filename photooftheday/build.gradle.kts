@@ -28,7 +28,7 @@ android {
         versionCode = libs.versions.versionCode.get().toInt()
         versionName = libs.versions.versionName.get()
 
-        base.archivesName = "ProjectivyPlugin-BingWallpaper-$versionName-c$versionCode"
+        base.archivesName = "ProjectivyPlugin-PhotoOfTheDay-$versionName-c$versionCode"
     }
 
     signingConfigs {

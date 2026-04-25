@@ -1,4 +1,4 @@
-package tv.projectivy.plugin.wallpaperprovider.bingwallpaper
+package tv.projectivy.plugin.wallpaperprovider.photooftheday
 
 import android.app.Service
 import android.content.Intent

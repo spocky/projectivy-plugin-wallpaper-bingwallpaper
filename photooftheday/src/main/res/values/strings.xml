@@ -1,7 +1,7 @@
 <resources>
-    <string name="plugin_name">Projectivy Wallpaper : Bing Wallpaper</string>
-    <string name="plugin_short_name">Bing Wallpaper</string>
-    <string name="plugin_description">Bing\'s Photo of the day</string>
+    <string name="plugin_name">Projectivy Wallpaper : Photo of the Day</string>
+    <string name="plugin_short_name">Photo of the Day</string>
+    <string name="plugin_description">Displays the "Photo of the Day" from a famous search engine</string>
 
     <string name="projectivy_not_installed">Warning, this plugin requires Projectivy Launcher which does not seem to be installed.</string>
 
